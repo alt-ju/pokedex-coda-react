@@ -1,11 +1,15 @@
 import { useData } from "vike-react/useData";
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import type { Data } from "./+data";
-
+import { TeamContext } from "../../../context/TeamContext";
 
 export default function PagePokemonUnique() {
     const data = useData<Data>()
     const [pokemon, setPokemon] = useState(data)
+    const teamContext = useContext(TeamContext)
+    const { addToTeam } = teamContext
+
+
     
     return (
         <>
@@ -21,7 +25,7 @@ export default function PagePokemonUnique() {
                 </div>
             ))}
             <div>
-                <a>Ajouter à l'équipe</a>
+                <button onClick={() => addToTeam(pokemon)}>Ajouter à l'équipe</button>
             </div>
         </div>
             

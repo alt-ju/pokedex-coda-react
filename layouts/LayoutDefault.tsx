@@ -5,18 +5,21 @@ import "./tailwind.css";
 import React from "react";
 import logoUrl from "../assets/logo.svg";
 import { Link } from "../components/Link.js";
+import { TeamProvider } from "../context/TeamContext";
 
 export default function LayoutDefault({ children }: { children: React.ReactNode }) {
   return (
-    <div className={"flex max-w-5xl m-auto"}>
+    <TeamProvider>
+      <div className={"flex max-w-5xl m-auto"}>
       <Sidebar>
         <Logo />
         <Link href="/">Welcome</Link>
-        <Link href="/teams">Equipes</Link>
-        {""}
+        <Link href="/pokemon/teams">Equipes</Link>
       </Sidebar>
       <Content>{children}</Content>
     </div>
+    </TeamProvider>
+    
   );
 }
 
