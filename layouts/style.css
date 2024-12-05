@@ -27,3 +27,37 @@ body {
 body.page-is-transitioning #page-content {
   opacity: 0;
 }
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.pokemon-card {
+  background-color: #f7f3f2;
+  margin: 2rem;
+  padding: 1rem;
+  min-width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: 0px 0px 28px -1px rgba(133,133,133,1);
+}
+
+h3 {
+  font-style: italic;
+}
+
+.shiny, .normal {
+  display: flex;
+  flex-direction: row;
+}
+
+.stats {
+  background-color: azure;
+  margin: 1rem;
+  padding: 1rem;
+}
