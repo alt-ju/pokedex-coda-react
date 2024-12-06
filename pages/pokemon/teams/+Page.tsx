@@ -17,7 +17,22 @@ export default function Page() {
     return(
         <>
             { team.map((poke) => (
-                <p>{ poke.name }</p>
+                <div>
+                    <a href={`/pokemon/${poke.slug}`}>
+                    { poke.name }
+                    </a>
+                    <div>
+                        <img src={ poke.sprites.normal.male } />
+                        <img src={ poke.sprites.shiny.male} />
+                    </div>
+                    { poke.sprites.normal.female !== null ? (
+                        <div>
+                            <img src={ poke.sprites.normal.female} />
+                            <img src={ poke.sprites.shiny.female} />
+                        </div>
+                    ) : null }
+                    
+                </div>
             ))}
         </>
     )

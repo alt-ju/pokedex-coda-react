@@ -8,8 +8,6 @@ export default function PagePokemonUnique() {
     const [pokemon, setPokemon] = useState(data)
     const teamContext = useContext(TeamContext)
     const { addToTeam } = teamContext
-
-
     
     return (
         <>

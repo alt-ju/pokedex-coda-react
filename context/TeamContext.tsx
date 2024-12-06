@@ -2,7 +2,27 @@ import { createContext, useState } from "react"
 
 type PokemonType = {
     slug: string,
-    name: string
+    name: string,
+    sprites: {
+        shiny: {
+            male: string | null,
+            female: string | null
+        },
+        normal: {
+            male: string | null,
+            female: string | null
+        }
+    },
+    types: {
+        name: string,
+        slot: number,
+        slug: string
+    },
+    stats: {
+        name: string,
+        slug: string,
+        base_stat: number
+    }
 }
 
 type TeamContextType = {

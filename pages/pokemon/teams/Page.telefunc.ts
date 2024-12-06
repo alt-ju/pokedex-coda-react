@@ -17,5 +17,5 @@ export const onGetPokemons = async (...pokemonSlugs: string[]) => {
         return pokeReturn
     }))
 
-    return pokemons
+    return
 }

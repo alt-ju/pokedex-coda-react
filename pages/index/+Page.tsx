@@ -1,25 +1,79 @@
-import React from "react";
-import { useData} from "vike-react/useData"
-import { useState } from 'react'
+import { useData } from "vike-react/useData"
+import { useState, useEffect } from 'react'
 import type { Data } from "./+data";
+import { onSearch, onGetTypes } from "./Page.telefunc";
+
 
 export default function Page() {
   const data = useData<Data>()
-  const [allPokemon, setPokemon] = useState(data)
+  const [ allPokemon, setAllPokemon ] = useState(data)
+  const [ filteredPokemon, setFilteredPokemon ] = useState(data)
+  const [ searchInput, setSearchInput ] = useState('')
+  const [ types, setTypes ] = useState([])
+  const [ selectedType, setSelectedType ] = useState('default')
 
+  const handleChange = (e: any) => {
+    e.preventDefault();
+    setSearchInput(e.target.value)
+  }
+
+  const handleSelectChange = (e: any) => {
+    setSelectedType(e.target.value)
+  }
+  
+  useEffect(() => {
+    if (searchInput.length > 0) {
+      onSearch(searchInput).then((pokemon: any) => {
+        const filtered = pokemon.filter((pokemon: any) =>
+        pokemon.name.toLowerCase().includes(searchInput.toLowerCase())
+      )
+        setFilteredPokemon(filtered)})
+    } else {
+      setFilteredPokemon(allPokemon)
+    }
+  }, [searchInput, allPokemon])
+
+  useEffect(() => {
+    onGetTypes().then((type: any) => { setTypes(type) })
+    console.log(types)
+  }, [])
+
+  useEffect(() => {
+    if (selectedType === 'default') {
+      setFilteredPokemon(allPokemon)
+    } else {
+      const filtered = allPokemon.filter((pokemon: any) => 
+        pokemon.types.some((type: {name: string, slug: string}) => type.name === selectedType)
+      )
+      setFilteredPokemon(filtered)
+    }
+  }, [selectedType, allPokemon])
+  
   return (
     <>
       <h1 className={"font-bold text-3xl pb-4"}>Mon Pokedex</h1>
+      <div>
+        <input type="text"
+          placeholder="Rechercher..." 
+          onChange={handleChange}
+          value={searchInput}/>
+        <select name="selectType" id="selectType" onChange={handleSelectChange}>
+          <option value="default">Tous types</option>
+          { types.map((type:any) => (
+            <option key={type.slug} value={type.name}>{type.name}</option>
+          ))}
+        </select>
+      </div>
+      
       <div className="container">
-        { allPokemon && allPokemon.length > 0 ? (
-          allPokemon.map((poke: any) => (
+        { filteredPokemon && filteredPokemon.length > 0 ? (
+          filteredPokemon.map((poke: any) => (
               <div className="pokemon-card" key={poke.id}>
                 <a href={`/pokemon/${poke.slug}`}>
                   { poke.name }
                 </a>
                 <h3>({ poke.slug })</h3>
                 <div>
-
                   <div className="shiny">
                     <p>Shiny</p>
                     { poke.sprites.shiny.male !== null ? (
@@ -47,7 +101,7 @@ export default function Page() {
               </div>
             )
           )) : (
-            <p>Chargement...</p>
+            null
           )
         }
       </div>
