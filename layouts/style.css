@@ -28,7 +28,7 @@ body.page-is-transitioning #page-content {
   opacity: 0;
 }
 
-.container {
+.container, .team {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -60,4 +60,8 @@ h3 {
   background-color: azure;
   margin: 1rem;
   padding: 1rem;
+}
+
+.team {
+  height: 60%;
 }

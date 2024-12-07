@@ -1,6 +1,6 @@
 import { createContext, useState } from "react"
 
-type PokemonType = {
+export type PokemonType = {
     slug: string,
     name: string,
     sprites: {
@@ -22,7 +22,7 @@ type PokemonType = {
         name: string,
         slug: string,
         base_stat: number
-    }
+    }[]
 }
 
 type TeamContextType = {
