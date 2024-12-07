@@ -17,7 +17,7 @@ export type PokemonType = {
         name: string,
         slot: number,
         slug: string
-    },
+    }[],
     stats: {
         name: string,
         slug: string,
