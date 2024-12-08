@@ -137,7 +137,7 @@ h3 {
 
 .title {
   font-size: 22px;
-  padding-bottom: 1rem;;
+  padding-bottom: 1rem;
 }
 
 .add-container {
@@ -159,6 +159,7 @@ h3 {
 }
 
 .team-type {
+
   display: flex;
   width: 300px;
   flex-direction: column;
