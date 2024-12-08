@@ -45,12 +45,15 @@ type TeamProviderProps = {
 export const TeamProvider = (props: TeamProviderProps) => {
     const [team, setTeam] = useState<PokemonType[]>([])
 
-    const addToTeam = (pokemon: PokemonType) => {
-        if (!team.find((poke) => poke.slug === pokemon.slug)) {
-            setTeam([...team, pokemon]);
-            console.log('pokemon ajouté', pokemon)
-        }
-    }
+        const addToTeam = (pokemon: PokemonType) => {
+            if (team.length < 6) {
+                if (!team.find((poke) => poke.slug === pokemon.slug)) {
+                    setTeam([...team, pokemon])
+                } 
+            } else {
+                alert('Votre équipe est pleine, vous ne pouvez pas ajouter plus de 6 pokémons.')
+            }
+    } 
 
     return (
         <TeamContext.Provider

@@ -5,7 +5,7 @@ const token = 'advanced-pokedex-api-key-9sd1u98cvg4t98yi'
 
 export const data = async () => {
     
-    const request = await fetch('https://pokedex.coda.memento-dev.fr/pokemon?limit=30&with=types', {
+    const request = await fetch('https://pokedex.coda.memento-dev.fr/pokemon?with=types', {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`

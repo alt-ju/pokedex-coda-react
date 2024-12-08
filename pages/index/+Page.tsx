@@ -35,7 +35,6 @@ export default function Page() {
 
   useEffect(() => {
     onGetTypes().then((type: any) => { setTypes(type) })
-    console.log(types)
   }, [])
 
   useEffect(() => {
@@ -52,12 +51,13 @@ export default function Page() {
   return (
     <>
       <h1 className={"font-bold text-3xl pb-4"}>Mon Pokedex</h1>
-      <div>
+      <div className="search-tools">
         <input type="text"
           placeholder="Rechercher..." 
           onChange={handleChange}
-          value={searchInput}/>
-        <select name="selectType" id="selectType" onChange={handleSelectChange}>
+          value={searchInput}
+          className="search-bar"/>
+        <select className="select" name="selectType" id="selectType" onChange={handleSelectChange}>
           <option value="default">Tous types</option>
           { types.map((type:any) => (
             <option key={type.slug} value={type.name}>{type.name}</option>
@@ -68,37 +68,20 @@ export default function Page() {
       <div className="container">
         { filteredPokemon && filteredPokemon.length > 0 ? (
           filteredPokemon.map((poke: any) => (
+            <a href={`/pokemon/${poke.slug}`}>
               <div className="pokemon-card" key={poke.id}>
-                <a href={`/pokemon/${poke.slug}`}>
-                  { poke.name }
-                </a>
-                <h3>({ poke.slug })</h3>
+                <p>{ poke.name }</p>
+                <p>({ poke.slug })</p>
                 <div>
-                  <div className="shiny">
-                    <p>Shiny</p>
-                    { poke.sprites.shiny.male !== null ? (
-                      <img src={ poke.sprites.shiny.male } alt={`Image d'un ${ poke.slug} shiny male`} />
-                    ) : null
-                    }
-                    { poke.sprites.shiny.female !== null ? (
-                        <img src={ poke.sprites.shiny.female } alt={`Image d'un ${ poke.slug} shiny femelle`} />
-                      ) : null
-                    }
-                  </div>
                   <div className="normal">
-                    <p>Normal</p>
                     { poke.sprites.normal.male !== null ? (
                       <img src={ poke.sprites.normal.male } alt={`Image d'un ${ poke.slug} normal male`} />
                     ) : null 
                     }
-                    {
-                      poke.sprites.normal.female !== null ? (
-                        <img src={ poke.sprites.normal.female } alt={`Image d'un ${ poke.slug} normal femelle`} />
-                      ) : null
-                    }
                   </div>
                 </div>
               </div>
+              </a>
             )
           )) : (
             null

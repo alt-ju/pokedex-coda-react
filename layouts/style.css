@@ -13,8 +13,10 @@ a {
 /* Reset */
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: sans-serif; 
+  background-color: #dbdbdb;
 }
+
 * {
   box-sizing: border-box;
 }
@@ -35,16 +37,19 @@ body.page-is-transitioning #page-content {
 }
 
 .pokemon-card {
-  background-color: #f7f3f2;
+  background-color: white;
   margin: 2rem;
   padding: 1rem;
-  min-width: 40%;
+  min-width: 20%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 20px;
   box-shadow: 0px 0px 28px -1px rgba(133,133,133,1);
+}
+.pokemon-card:hover {
+  background-color: rgb(255, 217, 0);
 }
 
 h3 {
@@ -59,15 +64,28 @@ h3 {
 .stats-container {
   display: flex;
 }
+
 .stats {
-  background-color: azure;
+  background-color: white;
   margin: 1rem;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 110px;
+  height: 110px;
+}
+
+.stats:hover {
+  background-color: rgba(105, 171, 191, 0.785);
 }
 
 .types-container {
   display: flex;
   flex-direction: row;
+  padding-bottom: 1rem;
 }
 
 .types {
@@ -78,6 +96,77 @@ h3 {
   height: 60%;
 }
 
-.btn {
+.btn, .btn-version {
   margin: 0 1rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 25px;
+  background-color: rgb(255, 255, 255);
+}
+
+.btn-version:hover {
+  background-color: rgb(236, 168, 158);
+}
+
+.add:hover {
+  background-color: rgb(255, 217, 0);
+}
+
+.delete:hover {
+  background-color: rgb(255, 162, 0);
+}
+
+.btn-clicked {
+  background-color: rgb(236, 168, 158);
+}
+
+.search-bar {
+  padding: 0.5rem;
+  margin-right: 1rem;
+  border-radius: 25px;
+  border: 1px solid rgb(255, 217, 0);
+}
+
+.select {
+  width: 150px;
+}
+
+.search-tools {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 22px;
+  padding-bottom: 1rem;;
+}
+
+.add-container {
+  display: flex;
+  justify-content: end;
+  padding-top: 2rem;
+}
+
+.team-stat {
+  margin: 1rem 0;
+  width: 500px;
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 20px;
+}
+
+.global-stats {
+  display: flex;
+}
+
+.team-type {
+  display: flex;
+  width: 300px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: top;
+  margin-left: 3rem;
+}
+
+.stat-title {
+  text-decoration: underline;
 }

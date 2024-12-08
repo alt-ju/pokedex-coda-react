@@ -43,7 +43,6 @@ export default function Page() {
     };
 
     const statsType = typesStats()
-    console.log(statsType)
     
     const handleDelete = (pokeToDelete: PokemonType) => {
         const updatedTeam = team.filter((poke) => poke.slug !== pokeToDelete.slug)
@@ -52,62 +51,45 @@ export default function Page() {
 
     return(
         <>
-            <h2>Mon équipe</h2>
+            <h2 className="title">Mon équipe</h2>
             <div className="team">
                 { team.map((poke) => (
                     <div className="pokemon-card">
                         <a href={`/pokemon/${poke.slug}`}>
                         { poke.name }
                         </a>
-                        <div className="shiny">
-                            <p>Shiny</p>
-                            { poke.sprites.shiny.male !== null ? (
-                            <img src={ poke.sprites.shiny.male } alt={`Image d'un ${ poke.slug} shiny male`} />
-                            ) : null
-                            }
-                            { poke.sprites.shiny.female !== null ? (
-                                <img src={ poke.sprites.shiny.female } alt={`Image d'un ${ poke.slug} shiny femelle`} />
-                            ) : null
-                            }
-                        </div>
                         <div className="normal">
-                            <p>Normal</p>
                             { poke.sprites.normal.male !== null ? (
                             <img src={ poke.sprites.normal.male } alt={`Image d'un ${ poke.slug} normal male`} />
                             ) : null 
                             }
-                            {
-                            poke.sprites.normal.female !== null ? (
-                                <img src={ poke.sprites.normal.female } alt={`Image d'un ${ poke.slug} normal femelle`} />
-                            ) : null
-                            }
                         </div>
                         <div>
-                            <button onClick={() => handleDelete(poke)}>Supprimer</button>
+                            <button className="btn delete" onClick={() => handleDelete(poke)}>Supprimer</button>
                         </div>
                     </div>
                 ))}
             </div>
-            <div className="team-stats">
-                <h2>Statistiques de l'équipe</h2>
-                <div className="team-stats">
-                    <div>
-                        <p>Moyenne des PV de l'équipe: { Math.round(stats.hp / team.length) }</p>
-                        <p>Moyenne des Attaques de l'équipe: { Math.round(stats.attack / team.length) }</p>
-                        <p>Moyenne des Défenses de l'équipe: { Math.round(stats.defense / team.length) }</p>
-                        <p>Moyenne des Attaque Spéciale de l'équipe: { Math.round(stats['special-attack'] / team.length)}</p>
-                        <p>Moyenne des Défenses Spéciales de l'équipe: { Math.round(stats['special-defense'] / team.length)}</p>
-                        <p>Moyenne des Vitesses de l'équipe: { Math.round(stats.speed / team.length)}</p>
-                    </div>
-                    <div>
-
+            
+            <div className="global-stats">
+                <div>
+                    <h2 className="stat-title">Statistiques de l'équipe</h2>
+                    <div className="team-stats">
+                        <div className="team-stat"><p>Moyenne des PV de l'équipe: { Math.round(stats.hp / team.length) }</p></div>
+                        <div className="team-stat"><p>Moyenne des Attaques de l'équipe: { Math.round(stats.attack / team.length) }</p></div>
+                        <div className="team-stat"><p>Moyenne des Défenses de l'équipe: { Math.round(stats.defense / team.length) }</p></div>
+                        <div className="team-stat"><p>Moyenne des Attaque Spéciale de l'équipe: { Math.round(stats['special-attack'] / team.length)}</p></div>
+                        <div className="team-stat"><p>Moyenne des Défenses Spéciales de l'équipe: { Math.round(stats['special-defense'] / team.length)}</p></div>
+                        <div className="team-stat"><p>Moyenne des Vitesses de l'équipe: { Math.round(stats.speed / team.length)}</p></div>
                     </div>
                 </div>
                 <div>
-                    <h2>Types dans l'équipe</h2>
-                    { Object.entries(statsType).map(([type, value]) => (
-                        <p>{type} x{value}</p>
-                    ))}
+                    <h2 className="stat-title">Types dans l'équipe</h2>
+                    <div className="team-type team-stat">
+                        { Object.entries(statsType).map(([type, value]) => (
+                            <p>{type} x{value}</p>
+                        ))}
+                    </div>
                 </div>
             </div>
         </>

@@ -8,20 +8,29 @@ export default function PagePokemonUnique() {
     const [pokemon, setPokemon] = useState(data)
     const teamContext = useContext(TeamContext)
     const { addToTeam } = teamContext
-    const [ selectedImage, setSelectedImage ] = useState<string | null>(pokemon.sprites.shiny.male)
+    const [ selectedImage, setSelectedImage ] = useState<string | null>(pokemon.sprites.normal.male)
 
     const handleImageSelection = (image: string) => {
         setSelectedImage(image)
+        const buttons = document.querySelectorAll('.btn-version')
+        buttons.forEach((button) => {
+            button.addEventListener('click', (event) => {
+                buttons.forEach((btn) => btn.classList.remove('btn-clicked'));
+                const clickedButton = event.target as HTMLElement
+                clickedButton.classList.add('btn-clicked')
+                }
+            )
+        })
     };
-    
+
     return (
         <>
         <div className="container-details">
-            <p>{ pokemon.name }</p>
+            <p className="title">{ pokemon.name }</p>
             <div className="button-container">
                 {pokemon.sprites.normal.male && (
                     <button
-                        className="btn"
+                        className="btn-version"
                         onClick={() => handleImageSelection(pokemon.sprites.normal.male)}
                     >
                         Normal Male
@@ -29,7 +38,7 @@ export default function PagePokemonUnique() {
                 )}
                 {pokemon.sprites.normal.female && (
                     <button
-                        className="btn"
+                        className="btn-version"
                         onClick={() => handleImageSelection(pokemon.sprites.normal.female)}
                     >
                         Normal Female
@@ -37,7 +46,7 @@ export default function PagePokemonUnique() {
                 )}
                 {pokemon.sprites.shiny.male && (
                     <button
-                        className="btn"
+                        className="btn-version"
                         onClick={() => handleImageSelection(pokemon.sprites.shiny.male)}
                     >
                         Shiny Male
@@ -45,7 +54,7 @@ export default function PagePokemonUnique() {
                 )}
                 {pokemon.sprites.shiny.female && (
                     <button
-                        className="btn"
+                        className="btn-version"
                         onClick={() => handleImageSelection(pokemon.sprites.shiny.female)}
                     >
                         Shiny Female
@@ -61,6 +70,7 @@ export default function PagePokemonUnique() {
                     </div> 
                 ))}
             </div>
+            <p>Statistiques du pokémon:</p>
             <div className="stats-container">
                 { pokemon.stats.map((stat: any) => (
                     <div className="stats">
@@ -69,8 +79,8 @@ export default function PagePokemonUnique() {
                     </div>
                 ))}
             </div>
-            <div>
-                <button onClick={() => addToTeam(pokemon)}>Ajouter à l'équipe</button>
+            <div className="add-container">
+                <button className="btn add" onClick={() => addToTeam(pokemon)}>Ajouter à l'équipe</button>
             </div>
         </div>
         </>
